@@ -1,7 +1,6 @@
 // ホットペッパー グルメサーチAPI
 // https://webservice.recruit.co.jp/doc/hotpepper/reference.html
 
-// 店舗情報
 interface ShopObj {
   id: string
   name: string // 掲載店名
@@ -25,6 +24,9 @@ interface ShopObj {
 interface GourmetResponse {
   results: {
     shop: ShopObj[]
+    results_available: number // 全件数
+    results_returned: string // 取得数
+    results_start: number // 開始位置
     
     // エラー時のレスポンス
     error: [{

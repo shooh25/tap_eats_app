@@ -1,7 +1,23 @@
-import gourmetClient from "../libs/api";
+import axios from "axios";
 
-export const getShopLists = () => {
-  return gourmetClient.get<GourmetResponse>("v1").then((res) => {
+// 店舗一覧を取得
+export const getShopLists = (startPage: number) => {
+  const apiKey = process.env.REACT_APP_API_KEY;
+
+  if (!apiKey) {
+    throw new Error("REACT_APP_API_KEY is not defined");
+  }
+
+  // 検索クエリパラメーター
+  const params = {
+    key: apiKey,
+    large_area: "Z011",
+    format: "json",
+    count: 10,
+    start: startPage,
+  };
+
+  return axios.get<GourmetResponse>("v1", { params }).then((res) => {
     const responseData = res.data.results;
 
     // レスポンスにエラーが含まれている場合
