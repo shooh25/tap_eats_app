@@ -1,10 +1,21 @@
-import React from 'react';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from 'react-query'
+import Top from './pages/Top';
 
-function App() {
+const App = () => {
+  const queryClient = new QueryClient()
+
   return (
-    <div className="App">
-    </div>
-  );
+    <>
+      <BrowserRouter>
+        <QueryClientProvider client={queryClient}>
+          <Routes>
+            <Route path="/" element={<Top />} />
+          </Routes>
+        </QueryClientProvider>
+      </BrowserRouter>
+    </>
+  )
 }
 
-export default App;
+export default App
