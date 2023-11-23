@@ -13,7 +13,7 @@ export const getShopLists = (startPage: number) => {
     key: apiKey,
     large_area: "Z011",
     format: "json",
-    count: 10,
+    count: 5,
     start: startPage,
   };
 
