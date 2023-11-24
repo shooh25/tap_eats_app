@@ -41,6 +41,7 @@ interface GourmetResponse {
   };
 }
 
+
 // Geolocation API
 // https://developer.mozilla.org/ja/docs/Web/API/Geolocation_API
 
@@ -61,3 +62,4 @@ interface RangeType {
   value: number;
   label: string;
 }
+

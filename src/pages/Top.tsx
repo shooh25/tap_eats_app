@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useQuery } from 'react-query'
 import { getShopLists } from '../apis/gourmet'
-import Select from "react-select";
 import ResultContent from '../components/ResultContent';
+import SearchContent from '../components/SearchContent';
 
 const Top: React.FC = () => {
 
@@ -12,6 +12,7 @@ const Top: React.FC = () => {
   // 現在位置情報 (初期値: 東京駅)
   const [position, setPosition] = useState<GeoResponse>({ latitude: 35.681236, longitude: 139.767125 })
 
+  // 検索半径のオプション
   const rangeOptions: RangeType[] = [
     { value: 1, label: "300m以内" },
     { value: 2, label: "500m以内" },
@@ -42,14 +43,13 @@ const Top: React.FC = () => {
     <>
       <div>
         <div>
-          <button onClick={getCurrentPosition}>現在地取得</button>
-          <Select
-            options={rangeOptions}
-            defaultValue={radiusRange}
-            onChange={(value) => {
-              value ? setRadiusRange(value) : setRadiusRange(rangeOptions[0])
-            }}
+          <SearchContent
+            radiusRange={radiusRange}
+            rangeOptions={rangeOptions}
+            getCurrentPosition={getCurrentPosition}
+            setRadiusRange={setRadiusRange}
           />
+
         </div>
         <div>
           <ResultContent
