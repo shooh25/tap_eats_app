@@ -2,9 +2,7 @@ import { useState } from 'react'
 import { useQuery } from 'react-query'
 import { getShopLists } from '../apis/gourmet'
 import Select from "react-select";
-import Heading from '../components/Heading'
-import ShopList from '../components/ShopList'
-import Pagenation from '../components/Pagenation'
+import ResultContent from '../components/ResultContent';
 
 const Top: React.FC = () => {
 
@@ -12,7 +10,7 @@ const Top: React.FC = () => {
   const [startPage, setStartPage] = useState<number>(1)
 
   // 現在位置情報 (初期値: 東京駅)
-  const [position, setPosition] = useState<GeoResponse>({ latitude: 34.8153, longitude: 135.5626 })
+  const [position, setPosition] = useState<GeoResponse>({ latitude: 35.681236, longitude: 139.767125 })
 
   const rangeOptions: RangeType[] = [
     { value: 1, label: "300m以内" },
@@ -25,9 +23,6 @@ const Top: React.FC = () => {
   // 検索半径
   const [radiusRange, setRadiusRange] = useState<RangeType>(rangeOptions[0])
 
-  // 店舗データ取得
-  const { isLoading, isError, data } = useQuery(['shops', startPage, position, radiusRange], () => getShopLists(startPage, position, radiusRange))
-
   // 現在位置取得
   const getCurrentPosition = () => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -36,11 +31,16 @@ const Top: React.FC = () => {
     });
   };
 
-  console.log(data)
+  // 店舗データ取得
+  const queryResult = useQuery(['shops', startPage, position, radiusRange], () => getShopLists({ startPage, position, radiusRange }), {
+    keepPreviousData: true,
+  })
+
+  console.log(queryResult)
+
   return (
     <>
       <div>
-        <Heading />
         <div>
           <button onClick={getCurrentPosition}>現在地取得</button>
           <Select
@@ -52,15 +52,11 @@ const Top: React.FC = () => {
           />
         </div>
         <div>
-          <Pagenation startPage={startPage} setStartPage={setStartPage} />
-          {isLoading && <>Loading...</>}
-          {isError && <>Something went wrong.</>}
-          {data && (
-            <ShopList shops={data.results.shop} />
-          )}
-        </div>
-        <div>
-          <Pagenation startPage={startPage} setStartPage={setStartPage} />
+          <ResultContent
+            queryResult={queryResult}
+            startPage={startPage}
+            setStartPage={setStartPage}
+          />
         </div>
       </div>
     </>

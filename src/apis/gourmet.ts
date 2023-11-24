@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // 店舗一覧を取得
-export const getShopLists = (startPage: number, position: GeoResponse, radiusRange: RangeType) => {
+export const getShopLists = ({startPage, position, radiusRange}: SearchQueryType) => {
   const apiKey = process.env.REACT_APP_API_KEY;
 
   if (!apiKey) {

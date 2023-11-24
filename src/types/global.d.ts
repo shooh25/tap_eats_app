@@ -44,7 +44,6 @@ interface GourmetResponse {
 // Geolocation API
 // https://developer.mozilla.org/ja/docs/Web/API/Geolocation_API
 
-// レスポンス
 interface GeoResponse {
   latitude: number;
   longitude: number;
@@ -54,7 +53,7 @@ interface GeoResponse {
 interface SearchQueryType {
   startPage: number; // ページ位置
   position: GeoResponse; // 現在位置情報
-  radiusRange: number; // 検索半径
+  radiusRange: RangeType; // 検索半径
 }
 
 // 検索半径
