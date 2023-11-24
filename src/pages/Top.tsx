@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useQuery } from 'react-query'
 import { getShopLists } from '../apis/gourmet'
 import { getPosition } from '../apis/geolocation';
+import { rangeOptions } from '../utils/constants';
 import ResultContent from '../components/ResultContent';
 import SearchContent from '../components/SearchContent';
 
@@ -14,14 +15,6 @@ const Top: React.FC = () => {
   // 現在位置情報 (初期値: 東京駅)
   const [position, setPosition] = useState<GeoResponse>({ latitude: 35.681236, longitude: 139.767125 })
 
-  // 検索半径のオプション
-  const rangeOptions: RangeType[] = [
-    { value: 1, label: "300m以内" },
-    { value: 2, label: "500m以内" },
-    { value: 3, label: "1000m以内" },
-    { value: 4, label: "2000m以内" },
-    { value: 5, label: "3000m以内" },
-  ]
 
   // 検索半径
   const [radiusRange, setRadiusRange] = useState<RangeType>(rangeOptions[0])
