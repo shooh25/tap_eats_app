@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { useQuery } from 'react-query'
 import { getShopLists } from '../apis/gourmet'
+import { getPosition } from '../apis/geolocation';
 import ResultContent from '../components/ResultContent';
 import SearchContent from '../components/SearchContent';
+
 
 const Top: React.FC = () => {
 
@@ -24,18 +26,24 @@ const Top: React.FC = () => {
   // 検索半径
   const [radiusRange, setRadiusRange] = useState<RangeType>(rangeOptions[0])
 
-  // 現在位置取得
-  const getCurrentPosition = () => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const { latitude, longitude } = position.coords;
-      setPosition({ latitude, longitude });
-    });
-  };
-
   // 店舗データ取得
   const queryResult = useQuery(['shops', startPage, position, radiusRange], () => getShopLists({ startPage, position, radiusRange }), {
     keepPreviousData: true,
   })
+
+  // 現在位置取得 (緯度, 軽度)
+  const handleSuccess = (position: GeolocationPosition) => {
+    const { latitude, longitude } = position.coords;
+    setPosition({ latitude, longitude });
+  };
+
+  const handleError = () => {
+    alert("エラーが発生しました");
+  };
+
+  const handleGetPosition = () => {
+    getPosition(handleSuccess, handleError);
+  };
 
   console.log(queryResult)
 
@@ -46,7 +54,7 @@ const Top: React.FC = () => {
           <SearchContent
             radiusRange={radiusRange}
             rangeOptions={rangeOptions}
-            getCurrentPosition={getCurrentPosition}
+            getCurrentPosition={handleGetPosition}
             setRadiusRange={setRadiusRange}
           />
 
