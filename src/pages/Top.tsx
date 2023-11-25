@@ -23,7 +23,7 @@ const Top: React.FC = () => {
     keepPreviousData: true,
   })
 
-  console.log(queryResult)
+  console.log(queryResult.data?.results.shop)
 
   return (
     <>

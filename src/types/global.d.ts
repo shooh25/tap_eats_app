@@ -3,15 +3,26 @@
 
 interface ShopObj {
   id: string;
+  lat: number;
+  lng: number;
   name: string; // 掲載店名
+  name_kana: string; // 掲載店名かな
   address: string; // 住所
   access: string; // アクセス
   logo_image: string; // サムネイル画像
   open: string; // 営業時間
-  lat: number;
-  lng: number;
+  capacity: number;
+
+  budget: {
+    name: string; // 予算
+  };
+
+  genre: {
+    code: string; 
+    name: string;
+  };
+
   photo: {
-    // 写真
     pc: {
       l: string;
       m: string;
@@ -41,7 +52,6 @@ interface GourmetResponse {
   };
 }
 
-
 // Geolocation API
 // https://developer.mozilla.org/ja/docs/Web/API/Geolocation_API
 
@@ -62,4 +72,3 @@ interface RangeType {
   value: number;
   label: string;
 }
-
