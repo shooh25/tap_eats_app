@@ -1,9 +1,13 @@
-import React from 'react'
+import { useState } from 'react';
+import ShopModal from './ShopModal';
+
 interface Props {
   shop: ShopObj
 }
 
 const ShopListItem: React.FC<Props> = ({ shop }) => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false) // モーダル表示/非表示
+
   return (
     <>
       <div>
@@ -11,8 +15,12 @@ const ShopListItem: React.FC<Props> = ({ shop }) => {
         <div>
           <img src={shop.logo_image} alt="logo_image" />
           <p>{shop.access}</p>
-
-          {/* <a href={`https://maps.google.com/maps?q=${shop.lat},${shop.lng}`} target="_blank">マップを見る</a> */}
+          <button onClick={() => setIsModalOpen(true)}>詳細</button>
+          <ShopModal
+            shop={shop}
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+          />
         </div>
       </div>
     </>
