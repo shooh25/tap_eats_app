@@ -1,16 +1,18 @@
 import { useState } from "react";
+import { defaultPosition } from "../utils/constants";
 
 // 現在位置を取得
 export const usePosition = () => {
-
+  
   // 取得中のロード画面
   const [isFetchingPos, setIsFetchingPos] = useState<boolean>(false);
 
   // 位置情報 (初期値: 東京駅)
-  const [position, setPosition] = useState<GeoResponse>({
-    latitude: 35.681236,
-    longitude: 139.767125,
-  });
+  const [position, setPosition] = useState<GeoResponse>(
+    JSON.parse(
+      sessionStorage.getItem("position") || JSON.stringify(defaultPosition)
+    )
+  );
 
   const getPosition = () => {
     setIsFetchingPos(true);
@@ -23,6 +25,7 @@ export const usePosition = () => {
 
     const errorCallback = () => {
       alert("エラーが発生しました");
+      setPosition(defaultPosition);
     };
 
     if (!navigator.geolocation) {

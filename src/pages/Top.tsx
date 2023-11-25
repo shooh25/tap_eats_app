@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useQuery } from 'react-query'
 import { getShopLists } from '../apis/gourmet'
 import { rangeOptions } from '../utils/constants';
@@ -9,7 +9,9 @@ import SearchContent from '../components/SearchContent';
 const Top: React.FC = () => {
 
   // ページ位置
-  const [startPage, setStartPage] = useState<number>(1)
+  const [startPage, setStartPage] = useState<number>(
+    parseInt(sessionStorage.getItem('startPage') || '1')
+  )
 
   // 検索半径
   const [radiusRange, setRadiusRange] = useState<RangeType>(rangeOptions[0])
@@ -23,7 +25,15 @@ const Top: React.FC = () => {
     keepPreviousData: true,
   })
 
-  console.log(queryResult.data?.results.shop)
+  // 検索クエリを更新した際にsessionStorageに保存
+  useEffect(() => {
+    sessionStorage.setItem('startPage', startPage.toString())
+    sessionStorage.setItem('position', JSON.stringify(position))
+  },[startPage, position])
+
+  useEffect(() => {
+    setStartPage(1)
+  }, [radiusRange, position])
 
   return (
     <>
