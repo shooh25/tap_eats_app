@@ -1,6 +1,6 @@
 import React from 'react'
 
-type Props = {
+interface Props {
   startPage: number // ページ位置
   available: number // 全件数
   isError: boolean

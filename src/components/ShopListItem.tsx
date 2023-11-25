@@ -1,6 +1,5 @@
 import React from 'react'
-
-type Props = {
+interface Props {
   shop: ShopObj
 }
 
@@ -12,7 +11,8 @@ const ShopListItem: React.FC<Props> = ({ shop }) => {
         <div>
           <img src={shop.logo_image} alt="logo_image" />
           <p>{shop.access}</p>
-          <a href={`https://maps.google.com/maps?q=${shop.lat},${shop.lng}`} target="_blank">マップを見る</a>
+
+          {/* <a href={`https://maps.google.com/maps?q=${shop.lat},${shop.lng}`} target="_blank">マップを見る</a> */}
         </div>
       </div>
     </>

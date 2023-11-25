@@ -1,7 +1,7 @@
 import React from 'react'
 import ShopListItem from './ShopListItem'
 
-type Props = {
+interface Props {
   shops: ShopObj[]
 }
 
