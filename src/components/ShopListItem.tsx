@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import ShopModal from './ShopModal';
+import Modal from 'react-modal';
 
 interface Props {
   shop: ShopObj
 }
 
 const ShopListItem: React.FC<Props> = ({ shop }) => {
+  Modal.setAppElement('#root');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false) // モーダル表示/非表示
 
   return (
