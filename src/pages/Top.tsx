@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useQuery } from 'react-query'
 import { getShopLists } from '../apis/gourmet'
-import { getPosition } from '../apis/geolocation';
 import { rangeOptions } from '../utils/constants';
+import { usePosition } from '../hooks/usePosition';
 import ResultContent from '../components/ResultContent';
 import SearchContent from '../components/SearchContent';
 
@@ -11,39 +11,17 @@ const Top: React.FC = () => {
   // ページ位置
   const [startPage, setStartPage] = useState<number>(1)
 
-  // 現在位置情報 (初期値: 東京駅)
-  const [position, setPosition] = useState<GeoResponse>({
-    latitude: 35.681236,
-    longitude: 139.767125
-  })
-
   // 検索半径
   const [radiusRange, setRadiusRange] = useState<RangeType>(rangeOptions[0])
+
+  // 現在位置を取得
+  const {position, isFetchingPos, getPosition} = usePosition();
 
   // 店舗データ取得
   const queryResult = useQuery(['shops', startPage, position, radiusRange],
     () => getShopLists({ startPage, position, radiusRange }), {
     keepPreviousData: true,
   })
-
-  // 現在位置取得中のロード
-  const [isFetchingPos, setIsFetchingPos] = useState<boolean>(false)
-
-  // 現在位置取得 (緯度, 軽度)
-  const handleSuccess = (position: GeolocationPosition) => {
-    const { latitude, longitude } = position.coords;
-    setPosition({ latitude, longitude });
-    setIsFetchingPos(false)
-  };
-
-  const handleError = () => {
-    alert("エラーが発生しました");
-  };
-
-  const handleGetPosition = () => {
-    setIsFetchingPos(true)
-    getPosition(handleSuccess, handleError);
-  };
 
   console.log(queryResult)
 
@@ -54,10 +32,9 @@ const Top: React.FC = () => {
           <SearchContent
             radiusRange={radiusRange}
             rangeOptions={rangeOptions}
-            getCurrentPosition={handleGetPosition}
+            getCurrentPosition={getPosition}
             setRadiusRange={setRadiusRange}
           />
-
         </div>
         <div>
           <ResultContent
