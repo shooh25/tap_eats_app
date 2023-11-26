@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import ShopList from './ShopList'
 import Pagenation from './Pagenation'
 import ShopEmpty from './ShopEmpty'
+import Loader from './Loader'
 
 interface Props {
   startPage: number // ページ位置
@@ -25,10 +26,8 @@ const ResultContent: React.FC<Props> = ({ queryResult, startPage, isFetchingPos,
   return (
     <>
       <div>
-        {isFetchingPos ? (
-          <div>
-            <p>Looding</p>
-          </div>
+        {isFetchingPos || queryResult.isLoading ? (
+          <Loader />
         ) : (
           <div>
             <Pagenation

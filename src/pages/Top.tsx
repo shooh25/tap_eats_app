@@ -24,9 +24,7 @@ const Top: React.FC = () => {
 
   // 店舗データ取得
   const queryResult = useQuery(['shops', startPage, position, radiusRange, shopGenre],
-    () => getShopLists({ startPage, position, radiusRange, shopGenre }), {
-    keepPreviousData: true,
-  })
+    () => getShopLists({ startPage, position, radiusRange, shopGenre }))
 
   // 検索クエリを更新した際にsessionStorageに保存
   useEffect(() => {
