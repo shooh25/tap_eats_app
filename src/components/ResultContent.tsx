@@ -41,13 +41,15 @@ const ResultContent: React.FC<Props> = ({ queryResult, startPage, isFetchingPos,
             <ShopEmpty />
           )}
         </div>
-        <Pagenation
-          startPage={startPage}
-          setStartPage={setStartPage}
-          isError={queryResult.isError}
-          isPreviewsData={queryResult.isPreviousData}
-          available={available}
-        />
+        <div className='py-4 flex justify-center'>
+          <Pagenation
+            startPage={startPage}
+            setStartPage={setStartPage}
+            isError={queryResult.isError}
+            isPreviewsData={queryResult.isPreviousData}
+            available={available}
+          />
+        </div>
       </div>
     </>
   )
