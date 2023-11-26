@@ -16,13 +16,13 @@ const ShopListItem: React.FC<Props> = ({ shop }) => {
         onClick={() => setIsModalOpen(true)}
         className='border-b border-solid border-borderGray cursor-pointer'>
         <h2 className='text-2xl font-bold'>{shop.name}</h2>
-        <div className='py-4'>
+        <div className='py-3'>
           <div className='flex gap-4'>
             <img src={shop.logo_image} alt="logo_image" className='w-32 h-32 object-contain' />
             <div>
               <p>{shop.access}</p>
               {shop.budget.name && (
-                <p className='text-lg'>¥ {shop.budget.name}</p>
+                <p>¥ {shop.budget.name}</p>
               )}
               <div className="border border-solid border-primary inline-block rounded-lg px-2 mt-1">
                 <p className="text-primary">{shop.genre.name}</p>

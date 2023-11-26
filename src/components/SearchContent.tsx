@@ -15,7 +15,7 @@ const SearchContent: React.FC<Props> = ({ radiusRange, shopGenre, getCurrentPosi
   return (
     <>
       <div className="flex gap-3">
-        <button onClick={getCurrentPosition}>現在地を取得</button>
+        <button onClick={getCurrentPosition} className="bg-primary py-1 px-5 rounded-md text-white font-bold">現在地を取得</button>
         <Select
           options={rangeOptionss}
           defaultValue={radiusRange}

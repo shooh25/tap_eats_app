@@ -46,11 +46,13 @@ const ShopModal: React.FC<Props> = ({ shop, isModalOpen, setIsModalOpen }) => {
             <img src={shop.photo.pc.l} alt="shop_photo" className="w-72 h-72 object-contain rounded-md" />
           </div>
           <div className="absolute bottom-0 w-full p-6 flex justify-center gap-4 border-t border-solid border-borderGray">
-            <button onClick={() => setIsModalOpen(false)}>閉じる</button>
-            <a href={`https://maps.google.com/maps?q=${shop.lat},${shop.lng}`}
-              target="_blank">
-              マップを見る
-            </a>
+            <button onClick={() => setIsModalOpen(false)} className="py-2 px-5 rounded-md text-black font-bold">閉じる</button>
+            <button className="bg-primary py-1 px-5 rounded-md text-white font-bold">
+              <a href={`https://maps.google.com/maps?q=${shop.lat},${shop.lng}`}
+                target="_blank">
+                マップを見る
+              </a>
+            </button>
           </div>
         </div>
       </Modal>
