@@ -24,6 +24,9 @@ const ShopListItem: React.FC<Props> = ({ shop }) => {
               {shop.budget.name && (
                 <p className='text-lg'>¥ {shop.budget.name}</p>
               )}
+              <div className="border border-solid border-primary inline-block rounded-lg px-2 mt-1">
+                <p className="text-primary">{shop.genre.name}</p>
+              </div>
             </div>
           </div>
         </div>

@@ -11,6 +11,7 @@ interface ShopObj {
   access: string; // アクセス
   logo_image: string; // サムネイル画像
   open: string; // 営業時間
+  close: string; // 定休日
   capacity: number;
 
   budget: {
