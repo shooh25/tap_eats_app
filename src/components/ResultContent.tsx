@@ -2,6 +2,7 @@ import { UseQueryResult } from 'react-query'
 import { useEffect, useState } from 'react'
 import ShopList from './ShopList'
 import Pagenation from './Pagenation'
+import ShopEmpty from './ShopEmpty'
 
 interface Props {
   startPage: number // ページ位置
@@ -12,8 +13,8 @@ interface Props {
 
 // 検索結果を表示
 const ResultContent: React.FC<Props> = ({ queryResult, startPage, isFetchingPos, setStartPage }) => {
-  const responseData = queryResult.data
   const [available, setAvailable] = useState<number>(0) // 全件数
+  const responseData = queryResult.data
 
   useEffect(() => {
     if (responseData) {
@@ -39,8 +40,10 @@ const ResultContent: React.FC<Props> = ({ queryResult, startPage, isFetchingPos,
             />
             <div>
               {queryResult.isError && <>Something went wrong.</>}
-              {responseData && (
+              {responseData && available ? (
                 <ShopList shops={responseData.results.shop} />
+              ) : (
+                <ShopEmpty />
               )}
             </div>
           </div>
