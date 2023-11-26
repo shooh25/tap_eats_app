@@ -15,7 +15,7 @@ const ShopListItem: React.FC<Props> = ({ shop }) => {
       <div
         onClick={() => setIsModalOpen(true)}
         className='border-b border-solid border-borderGray cursor-pointer'>
-        <h2 className='text-2xl font-bold'>{shop.name}</h2>
+        <h2 className='text-2xl font-bold text-primary'>{shop.name}</h2>
         <div className='py-3'>
           <div className='flex gap-4'>
             <img src={shop.logo_image} alt="logo_image" className='w-32 h-32 object-contain' />
