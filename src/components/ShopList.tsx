@@ -9,7 +9,7 @@ interface Props {
 const ShopList: React.FC<Props> = ({ shops }) => {
   return (
     <>
-      <ul>
+      <ul className='flex flex-col gap-4'>
         {shops.map((shop, i) => (
           <li key={i}>
             <ShopListItem shop={shop} />

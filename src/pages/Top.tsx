@@ -41,7 +41,7 @@ const Top: React.FC = () => {
   return (
     <>
       <div className='max-w-4xl mx-auto px-6 flex flex-col'>
-        <div className='p-4'>
+        <div className='p-5'>
           <SearchContent
             radiusRange={radiusRange}
             shopGenre={shopGenre}
@@ -50,7 +50,7 @@ const Top: React.FC = () => {
             setShopGenre={setShopGenre}
           />
         </div>
-        <div className='p-4 bg-bgWhite rounded-lg'>
+        <div className='p-5 bg-bgWhite rounded-lg'>
           <ResultContent
             queryResult={queryResult}
             startPage={startPage}
