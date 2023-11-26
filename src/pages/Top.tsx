@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useQuery } from 'react-query'
 import { getShopLists } from '../apis/gourmet'
-import { rangeOptions } from '../utils/constants';
+import { genreOptions, rangeOptionss } from '../utils/constants';
 import { usePosition } from '../hooks/usePosition';
 import ResultContent from '../components/ResultContent';
 import SearchContent from '../components/SearchContent';
@@ -13,15 +13,18 @@ const Top: React.FC = () => {
     parseInt(sessionStorage.getItem('startPage') || '1')
   )
 
+  // 店舗ジャンル
+  const [shopGenre, setShopGenre] = useState<OptionType>(genreOptions[0])
+
   // 検索半径
-  const [radiusRange, setRadiusRange] = useState<RangeType>(rangeOptions[0])
+  const [radiusRange, setRadiusRange] = useState<OptionType>(rangeOptionss[0])
 
   // 現在位置を取得
-  const {position, isFetchingPos, getPosition} = usePosition();
+  const { position, isFetchingPos, getPosition } = usePosition();
 
   // 店舗データ取得
-  const queryResult = useQuery(['shops', startPage, position, radiusRange],
-    () => getShopLists({ startPage, position, radiusRange }), {
+  const queryResult = useQuery(['shops', startPage, position, radiusRange, shopGenre],
+    () => getShopLists({ startPage, position, radiusRange, shopGenre }), {
     keepPreviousData: true,
   })
 
@@ -29,11 +32,13 @@ const Top: React.FC = () => {
   useEffect(() => {
     sessionStorage.setItem('startPage', startPage.toString())
     sessionStorage.setItem('position', JSON.stringify(position))
-  },[startPage, position])
+  }, [startPage, position])
 
   useEffect(() => {
     setStartPage(1)
-  }, [radiusRange, position])
+  }, [radiusRange, shopGenre, position])
+
+  console.log(shopGenre)
 
   return (
     <>
@@ -41,9 +46,10 @@ const Top: React.FC = () => {
         <div>
           <SearchContent
             radiusRange={radiusRange}
-            rangeOptions={rangeOptions}
+            shopGenre={shopGenre}
             getCurrentPosition={getPosition}
             setRadiusRange={setRadiusRange}
+            setShopGenre={setShopGenre}
           />
         </div>
         <div>

@@ -18,8 +18,8 @@ interface ShopObj {
   };
 
   genre: {
-    code: string; 
-    name: string;
+    code: string,
+    name: string,
   };
 
   photo: {
@@ -64,11 +64,12 @@ interface GeoResponse {
 interface SearchQueryType {
   startPage: number; // ページ位置
   position: GeoResponse; // 現在位置情報
-  radiusRange: RangeType; // 検索半径
+  shopGenre: OptionType; // 店舗ジャンル
+  radiusRange: OptionType; // 検索半径
 }
 
-// 検索半径
-interface RangeType {
-  value: number;
+// react-selectのオプション
+interface OptionType {
+  value: string;
   label: string;
 }

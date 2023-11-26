@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // 店舗一覧を取得
-export const getShopLists = ({startPage, position, radiusRange}: SearchQueryType) => {
+export const getShopLists = ({startPage, position, radiusRange, shopGenre}: SearchQueryType) => {
   const apiKey = process.env.REACT_APP_API_KEY;
 
   if (!apiKey) {
@@ -16,7 +16,8 @@ export const getShopLists = ({startPage, position, radiusRange}: SearchQueryType
     start: startPage,
     lat: position.latitude,
     lng: position.longitude,
-    range: radiusRange.value
+    range: radiusRange.value,
+    genre: shopGenre.value,
   };
 
   return axios.get<GourmetResponse>("v1", { params }).then((res) => {

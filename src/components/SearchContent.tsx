@@ -1,24 +1,35 @@
 import Select from "react-select";
+import { rangeOptionss } from "../utils/constants";
+import { genreOptions } from "../utils/constants";
 
 interface Props {
-  radiusRange: RangeType
-  rangeOptions: RangeType[]
+  radiusRange: OptionType
+  shopGenre: OptionType
   getCurrentPosition: () => void
-  setRadiusRange: React.Dispatch<React.SetStateAction<RangeType>>
+  setShopGenre: React.Dispatch<React.SetStateAction<OptionType>>
+  setRadiusRange: React.Dispatch<React.SetStateAction<OptionType>>
 }
 
-const SearchContent: React.FC<Props> = ({radiusRange, rangeOptions, getCurrentPosition, setRadiusRange}) => {
+const SearchContent: React.FC<Props> = ({radiusRange, shopGenre, getCurrentPosition, setRadiusRange, setShopGenre}) => {
 
   return (
     <>
       <button onClick={getCurrentPosition}>現在地を取得</button>
       <Select
-        options={rangeOptions}
+        options={rangeOptionss}
         defaultValue={radiusRange}
         onChange={(value) => {
-          value ? setRadiusRange(value) : setRadiusRange(rangeOptions[0])
+          value ? setRadiusRange(value) : setRadiusRange(rangeOptionss[0])
         }}
       />
+      <Select
+        options={genreOptions}
+        defaultValue={shopGenre}
+        onChange={(value) => {
+          value ? setShopGenre(value) : setShopGenre(genreOptions[0])
+        }}
+      />
+      
     </>
   )
 }
