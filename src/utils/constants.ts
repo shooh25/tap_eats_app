@@ -10,7 +10,7 @@ export const rangeOptionss: OptionType[] = [
 
 // 店舗ジャンルのオプション
 export const genreOptions: OptionType[] = [
-  { value: '', label: 'すべて'},
+  { value: '', label: 'すべてのジャンル'},
   { value: 'G001', label: '居酒屋'},
   { value: 'G002', label: 'ダイニングバー・バル'},
   { value: 'G003', label: '創作料理'},

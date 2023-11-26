@@ -23,30 +23,31 @@ const ResultContent: React.FC<Props> = ({ queryResult, startPage, isFetchingPos,
     }
   }, [responseData])
 
+  if (isFetchingPos || queryResult.isLoading) {
+    return <><Loader /></>
+  }
+
+  if (queryResult.isError) {
+    return <>Something went wrong.</>
+  }
+
   return (
     <>
       <div>
-        {isFetchingPos || queryResult.isLoading ? (
-          <Loader />
-        ) : (
-          <div>
-            <Pagenation
-              startPage={startPage}
-              setStartPage={setStartPage}
-              isError={queryResult.isError}
-              isPreviewsData={queryResult.isPreviousData}
-              available={available}
-            />
-            <div>
-              {queryResult.isError && <>Something went wrong.</>}
-              {responseData && available ? (
-                <ShopList shops={responseData.results.shop} />
-              ) : (
-                <ShopEmpty />
-              )}
-            </div>
-          </div>
-        )}
+        <div>
+          {responseData && available ? (
+            <ShopList shops={responseData.results.shop} />
+          ) : (
+            <ShopEmpty />
+          )}
+        </div>
+        <Pagenation
+          startPage={startPage}
+          setStartPage={setStartPage}
+          isError={queryResult.isError}
+          isPreviewsData={queryResult.isPreviousData}
+          available={available}
+        />
       </div>
     </>
   )
