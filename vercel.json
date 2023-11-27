@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source":  "/v1:path*",
+      "destination": "https://webservice.recruit.co.jp/hotpepper/gourmet/v1/:path*"
+    }
+  ]
+}
