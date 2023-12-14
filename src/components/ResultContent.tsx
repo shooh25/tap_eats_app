@@ -34,22 +34,20 @@ const ResultContent: React.FC<Props> = ({ queryResult, startPage, isFetchingPos,
   return (
     <>
       <div>
-        <div>
-          {responseData && available ? (
-            <ShopList shops={responseData.results.shop} />
-          ) : (
-            <ShopEmpty />
-          )}
-        </div>
-        <div className='py-4 flex justify-center'>
-          <Pagenation
-            startPage={startPage}
-            setStartPage={setStartPage}
-            isError={queryResult.isError}
-            isPreviewsData={queryResult.isPreviousData}
-            available={available}
-          />
-        </div>
+        {responseData && available ? (
+          <ShopList shops={responseData.results.shop} />
+        ) : (
+          <ShopEmpty />
+        )}
+      </div>
+      <div className='py-4 flex justify-center'>
+        <Pagenation
+          startPage={startPage}
+          setStartPage={setStartPage}
+          isError={queryResult.isError}
+          isPreviewsData={queryResult.isPreviousData}
+          available={available}
+        />
       </div>
     </>
   )
