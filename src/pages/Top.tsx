@@ -36,30 +36,26 @@ const Top: React.FC = () => {
     setStartPage(1)
   }, [radiusRange, shopGenre, position])
 
-  console.log(shopGenre)
-
   return (
-    <>
-      <div className='max-w-4xl mx-auto px-6 flex flex-col'>
-        <div className='p-5'>
-          <SearchContent
-            radiusRange={radiusRange}
-            shopGenre={shopGenre}
-            getCurrentPosition={getPosition}
-            setRadiusRange={setRadiusRange}
-            setShopGenre={setShopGenre}
-          />
-        </div>
-        <div className='p-5 bg-bgWhite rounded-lg'>
-          <ResultContent
-            queryResult={queryResult}
-            startPage={startPage}
-            isFetchingPos={isFetchingPos}
-            setStartPage={setStartPage}
-          />
-        </div>
+    <div className='max-w-4xl mx-auto px-6 flex flex-col'>
+      <div className='p-5'>
+        <SearchContent
+          radiusRange={radiusRange}
+          shopGenre={shopGenre}
+          getCurrentPosition={getPosition}
+          setRadiusRange={setRadiusRange}
+          setShopGenre={setShopGenre}
+        />
       </div>
-    </>
+      <div className='p-5 bg-bgWhite rounded-lg'>
+        <ResultContent
+          queryResult={queryResult}
+          startPage={startPage}
+          isFetchingPos={isFetchingPos}
+          setStartPage={setStartPage}
+        />
+      </div>
+    </div>
   )
 }
 

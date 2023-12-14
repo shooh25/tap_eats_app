@@ -6,15 +6,13 @@ const App = () => {
   const queryClient = new QueryClient()
 
   return (
-    <>
-      <BrowserRouter>
-        <QueryClientProvider client={queryClient}>
-          <Routes>
-            <Route path="/" element={<Top />} />
-          </Routes>
-        </QueryClientProvider>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <Routes>
+          <Route path="/" element={<Top />} />
+        </Routes>
+      </QueryClientProvider>
+    </BrowserRouter>
   )
 }
 
